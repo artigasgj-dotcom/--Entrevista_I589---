@@ -46,5 +46,6 @@ elif opcion == "Generar PDF completo":
 
 # 🧭 Pie de página ceremonial
 st.markdown("---")
-st.markdown("Aplicación creada por Jorge Artigas para proteger la voz de quienes buscan asilo.  
+st.markdown("Aplicación creada por Jorge Artigas para proteger la voz de quienes buscan asilo.")
 Diseñada con claridad, dignidad y propósito.")
+
