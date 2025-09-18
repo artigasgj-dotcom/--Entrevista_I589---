@@ -1,15 +1,17 @@
 import streamlit as st
 from PIL import Image
+
+# Importar módulos funcionales
 from entrevista import abrir_entrevista
 from parte_a_ampliada import abrir_parte_a_ampliada
 from parte_b import abrir_parte_b
 from parte_c import abrir_parte_c
 from generador_pdf import generar_pdf
 
-# 🦅 Configuración ceremonial
-st.set_page_config(page_title="Entrevista I-589", page_icon="🦅", layout="centered")
+# 🦅 Configuración de la página
+st.set_page_config(page_title="Entrevista Ética I-589", page_icon="🦅", layout="centered")
 
-# 🛡️ Encabezado protector
+# 🛡️ Encabezado ceremonial
 st.title("🦅 Entrevista con Dignidad")
 st.markdown("""
 Este espacio honra tu historia.  
