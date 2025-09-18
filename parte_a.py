@@ -5,7 +5,10 @@ def abrir_entrevista():
     st.subheader("🧩 Parte A – Datos Personales")
     st.markdown("Esta sección honra tu identidad.\nResponde con calma y claridad.\nTu información será tratada con respeto y protección.")
 
+    # 🆔 Identificador obligatorio
     numero_a = st.text_input("🆔 Número A del cliente (obligatorio)")
+
+    # 🧍 Datos personales
     nombre = st.text_input("Nombre completo")
     fecha_nacimiento = st.date_input("Fecha de nacimiento")
     pais_origen = st.text_input("País de origen")
@@ -16,6 +19,7 @@ def abrir_entrevista():
     genero = st.selectbox("Identidad de género", ["Masculino", "Femenino", "Otro", "Prefiero no decir"])
     estado_civil = st.selectbox("Estado civil", ["Soltero/a", "Casado/a", "Separado/a", "Viudo/a", "Otro"])
 
+    # 💾 Botón para guardar
     if st.button("Guardar Parte A"):
         if not numero_a.strip():
             st.warning("⚠️ Debes ingresar el Número A para continuar.")
