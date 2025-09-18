@@ -21,7 +21,7 @@ Cada respuesta será tratada con respeto, protección y propósito.
 # 🖼️ Mostrar imagen del águila
 try:
     imagen = Image.open("aguila.png.png")
-    st.image(imagen, caption="Símbolo de protección", use_column_width=True)
+    st.image(imagen, caption="Símbolo de protección", use_container_width=True)
 except Exception:
     st.subheader("Formulario I-589")
 
@@ -53,4 +53,3 @@ Aplicación creada por Jorge Artigas
 para proteger la voz de quienes buscan asilo.  
 Diseñada con claridad, dignidad y propósito.
 """)
-
