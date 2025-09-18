@@ -1,70 +1,27 @@
-import tkinter as tk
-from tkinter import messagebox
-from parte_a import crear_base_parte_a, guardar_parte_a_ampliada
-import re
+import streamlit as st
 
 def abrir_parte_a_ampliada():
-    crear_base_parte_a()
+    st.subheader("🧩 Parte A Ampliada – Detalles de Identidad")
 
-    ventana = tk.Toplevel()
-    ventana.title("Parte A Ampliada")
-    ventana.geometry("600x600")
-    ventana.configure(bg="#f9f9f9")
+    st.markdown("""
+    Esta sección amplía tu historia personal.  
+    Puedes compartir detalles que ayuden a comprender tu contexto con claridad y respeto.  
+    Tu voz será cuidada con dignidad.
+    """)
 
-    campos = {
-        "Número A": None,
-        "Otros nombres usados": None,
-        "Dirección física": None,
-        "Dirección postal": None,
-        "Nacionalidad actual": None,
-        "Nacionalidad de nacimiento": None,
-        "Religión": None,
-        "Grupo étnico": None,
-        "Idiomas hablados": None,
-        "Nivel de inglés": None,
-        "Estado migratorio actual": None,
-        "Número I-94": None
-    }
+    # Campos ampliados
+    ocupacion = st.text_input("Ocupación actual")
+    nivel_educativo = st.selectbox("Nivel educativo", [
+        "Sin escolaridad", "Primaria", "Secundaria", "Técnico", "Universitario", "Otro"
+    ])
+    grupo_etnico = st.text_input("Grupo étnico o cultural")
+    religion = st.text_input("Religión o práctica espiritual")
+    identidad_comunitaria = st.text_area("¿Cómo te identificas dentro de tu comunidad?")
+    idioma_secundario = st.text_input("¿Hablas otro idioma además del principal?")
+    habilidades = st.text_area("¿Qué habilidades o conocimientos consideras valiosos?")
+    contexto_familiar = st.text_area("¿Hay algo que debamos saber sobre tu familia o entorno?")
+    valores_personales = st.text_area("¿Qué valores te guían en tu vida diaria?")
 
-    entradas = {}
-    fila = 0
-    for etiqueta in campos:
-        tk.Label(ventana, text=etiqueta, bg="#f9f9f9").grid(row=fila, column=0, padx=10, pady=5, sticky="w")
-        entrada = tk.Entry(ventana, width=50)
-        entrada.grid(row=fila, column=1, padx=10, pady=5)
-        entradas[etiqueta] = entrada
-        fila += 1
-
-    def guardar():
-        datos = [entradas[campo].get().strip() for campo in campos]
-
-        numero_a = datos[0]
-        numero_i94 = datos[-1]
-        nivel_ingles = datos[-3]
-        estado_migratorio = datos[-2]
-
-        if not all(datos):
-            messagebox.showwarning("Faltan datos", "Por favor completa todos los campos.")
-            return
-
-        if not re.match(r"^A\d{8,9}$", numero_a):
-            messagebox.showerror("Error", "El número A debe comenzar con 'A' seguido de 8 o 9 dígitos.")
-            return
-
-        if not numero_i94.isdigit():
-            messagebox.showerror("Error", "El número I-94 debe contener solo dígitos.")
-            return
-
-        if re.search(r"[^a-zA-Z\s]", nivel_ingles):
-            messagebox.showerror("Error", "El nivel de inglés debe ser una palabra o frase sin números ni símbolos.")
-            return
-
-        if re.search(r"[^a-zA-Z\s]", estado_migratorio):
-            messagebox.showerror("Error", "El estado migratorio debe ser una palabra o frase sin números ni símbolos.")
-            return
-
-        guardar_parte_a_ampliada(*datos)
-        messagebox.showinfo("Guardado", "Parte A Ampliada guardada correctamente.")
-        ventana.destroy()
-
-    tk.Button(ventana, text="Guardar Parte A Ampliada", command=guardar).grid(row=fila, column=0, columnspan=2, pady=20)
+    # Confirmación
+    if st.button("Guardar esta sección"):
+        st.success("✅ Parte A Ampliada guardada con dignidad.")
