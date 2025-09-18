@@ -18,7 +18,10 @@ def abrir_parte_a_ampliada():
             conn = sqlite3.connect("clientes.db")
             cursor = conn.cursor()
 
-            # Crear tabla si no existe
+            # ⚠️ Solo usar una vez para limpiar la tabla mal creada
+            cursor.execute("DROP TABLE IF EXISTS parte_a_ampliada")
+
+            # Crear tabla correctamente
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS parte_a_ampliada (
                     numero_a TEXT PRIMARY KEY,
