@@ -14,20 +14,32 @@ def abrir_parte_b():
             st.warning("⚠️ Debes ingresar el Número A.")
             return
 
-        conn = sqlite3.connect("clientes.db")
-        cursor = conn.cursor()
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS parte_b (
-                numero_a TEXT PRIMARY KEY,
-                fecha_entrada TEXT,
-                lugar_entrada TEXT,
-                estatus_migratorio TEXT
-            )
-        """)
-        cursor.execute("""
-            INSERT OR REPLACE INTO parte_b (numero_a, fecha_entrada, lugar_entrada, estatus_migratorio)
-            VALUES (?, ?, ?, ?)
-        """, (numero_a, str(fecha_entrada), lugar_entrada, estatus))
-        conn.commit()
-        conn.close()
-        st.success("✅ Parte B guardada correctamente.")
+        try:
+            conn = sqlite3.connect("clientes.db")
+            cursor = conn.cursor()
+
+            # ⚠️ Solo usar una vez para limpiar la tabla mal creada
+            cursor.execute("DROP TABLE IF EXISTS parte_b")
+
+            # Crear tabla correctamente
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS parte_b (
+                    numero_a TEXT PRIMARY KEY,
+                    fecha_entrada TEXT,
+                    lugar_entrada TEXT,
+                    estatus_migratorio TEXT
+                )
+            """)
+
+            # Insertar o actualizar datos
+            cursor.execute("""
+                INSERT OR REPLACE INTO parte_b (numero_a, fecha_entrada, lugar_entrada, estatus_migratorio)
+                VALUES (?, ?, ?, ?)
+            """, (numero_a, str(fecha_entrada), lugar_entrada, estatus))
+
+            conn.commit()
+            conn.close()
+            st.success("✅ Parte B guardada correctamente.")
+
+        except Exception as e:
+            st.error(f"❌ Error al guardar los datos: {e}")
