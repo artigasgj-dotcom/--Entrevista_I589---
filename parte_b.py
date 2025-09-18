@@ -1,34 +1,33 @@
 import streamlit as st
+import sqlite3
 
 def abrir_parte_b():
-    st.subheader("🧩 Parte B – Historial Migratorio")
+    st.subheader("📙 Parte B – Historial Migratorio")
 
-    st.markdown("""
-    Esta sección recoge tu recorrido migratorio.  
-    Puedes compartir fechas, lugares y motivos con confianza.  
-    Tu historia será tratada con respeto y protección.
-    """)
+    numero_a = st.text_input("Número A del cliente")
+    fecha_entrada = st.date_input("Fecha de entrada a EE.UU.")
+    lugar_entrada = st.text_input("Lugar de entrada")
+    estatus = st.text_input("Estatus migratorio actual")
 
-    # Campos migratorios
-    fecha_llegada = st.date_input("Fecha de llegada a EE.UU.")
-    lugar_ingreso = st.text_input("Lugar de ingreso (puerto/frontera)")
-    tipo_entrada = st.selectbox("Tipo de entrada", [
-        "Visa de turista", "Visa de trabajo", "Visa de estudiante", "Sin visa", "Otro"
-    ])
-    detencion = st.radio("¿Fuiste detenido al ingresar?", ["Sí", "No"])
-    lugar_detencion = ""
-    if detencion == "Sí":
-        lugar_detencion = st.text_input("¿Dónde fuiste detenido?")
-        documentos_entregados = st.text_area("¿Qué documentos te entregaron durante la detención?")
-    else:
-        documentos_entregados = st.text_area("¿Qué documentos te entregaron al ingresar?")
+    if st.button("Guardar Parte B"):
+        if not numero_a.strip():
+            st.warning("⚠️ Debes ingresar el Número A.")
+            return
 
-    liberacion = st.radio("¿Fuiste liberado con condiciones?", ["Sí", "No"])
-    condiciones = ""
-    if liberacion == "Sí":
-        condiciones = st.text_area("Describe las condiciones de liberación (ej. grillete, presentación, etc.)")
-
-    # Confirmación
-    if st.button("Guardar esta sección"):
-        st.success("✅ Historial migratorio guardado con dignidad.")
-    tk.Button(ventana, text="Guardar Parte B", command=guardar).grid(row=fila, column=0, columnspan=2, pady=20)
+        conn = sqlite3.connect("clientes.db")
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS parte_b (
+                numero_a TEXT PRIMARY KEY,
+                fecha_entrada TEXT,
+                lugar_entrada TEXT,
+                estatus_migratorio TEXT
+            )
+        """)
+        cursor.execute("""
+            INSERT OR REPLACE INTO parte_b (numero_a, fecha_entrada, lugar_entrada, estatus_migratorio)
+            VALUES (?, ?, ?, ?)
+        """, (numero_a, str(fecha_entrada), lugar_entrada, estatus))
+        conn.commit()
+        conn.close()
+        st.success("✅ Parte B guardada correctamente.")
