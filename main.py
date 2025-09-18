@@ -7,24 +7,21 @@ from parte_a_ampliada import abrir_parte_a_ampliada
 from parte_b import abrir_parte_b
 from parte_c import abrir_parte_c
 from generador_pdf import generar_pdf
-from ver_respuestas import ver_respuestas  # Nuevo módulo agregado
+from ver_respuestas import ver_respuestas
 
 # 🦅 Configuración de la página
 st.set_page_config(page_title="Entrevista Ética I-589", page_icon="🦅", layout="centered")
 
-# 🛡️ Encabezado ceremonial
-st.title("🦅 Entrevista con Dignidad")
-st.markdown("""
-Este espacio honra tu historia.  
-Cada respuesta será tratada con respeto, protección y propósito.
-""")
+# 🛡️ Bienvenida ceremonial
+st.title("🦅 Bienvenido a Asilym")
+st.markdown("Esta herramienta protege la voz de quienes buscan asilo, con claridad, dignidad y propósito.")
 
-# 🖼️ Mostrar imagen del águila
+# 🖼️ Mostrar imagen del águila si está disponible
 try:
     imagen = Image.open("aguila.png.png")
     st.image(imagen, caption="Símbolo de protección", use_container_width=True)
 except Exception:
-    st.subheader("Formulario I-589")
+    st.info("Imagen ceremonial no disponible en este entorno.")
 
 # 📋 Menú de navegación
 opcion = st.selectbox("Selecciona una sección:", [
@@ -33,7 +30,7 @@ opcion = st.selectbox("Selecciona una sección:", [
     "Parte B - Historial Migratorio",
     "Parte C - Temor y Persecución",
     "Generar PDF completo",
-    "Ver respuestas guardadas"  # Nueva opción agregada
+    "Ver respuestas guardadas"
 ])
 
 # 🔄 Ejecutar función correspondiente
@@ -57,5 +54,3 @@ Aplicación creada por Jorge Artigas
 para proteger la voz de quienes buscan asilo.  
 Diseñada con claridad, dignidad y propósito.
 """)
-
-
