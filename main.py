@@ -18,6 +18,9 @@ Este espacio honra tu historia.
 Cada respuesta será tratada con respeto, protección y propósito.
 """)
 
+
+
+
 # 🖼️ Mostrar imagen del águila
 try:
     imagen = Image.open("aguila.png.png")
@@ -53,3 +56,4 @@ Aplicación creada por Jorge Artigas
 para proteger la voz de quienes buscan asilo.  
 Diseñada con claridad, dignidad y propósito.
 """)
+
