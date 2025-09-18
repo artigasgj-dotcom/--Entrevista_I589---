@@ -7,6 +7,7 @@ from parte_a_ampliada import abrir_parte_a_ampliada
 from parte_b import abrir_parte_b
 from parte_c import abrir_parte_c
 from generador_pdf import generar_pdf
+from ver_respuestas import ver_respuestas  # Nuevo módulo agregado
 
 # 🦅 Configuración de la página
 st.set_page_config(page_title="Entrevista Ética I-589", page_icon="🦅", layout="centered")
@@ -17,9 +18,6 @@ st.markdown("""
 Este espacio honra tu historia.  
 Cada respuesta será tratada con respeto, protección y propósito.
 """)
-
-
-
 
 # 🖼️ Mostrar imagen del águila
 try:
@@ -34,7 +32,8 @@ opcion = st.selectbox("Selecciona una sección:", [
     "Parte A Ampliada",
     "Parte B - Historial Migratorio",
     "Parte C - Temor y Persecución",
-    "Generar PDF completo"
+    "Generar PDF completo",
+    "Ver respuestas guardadas"  # Nueva opción agregada
 ])
 
 # 🔄 Ejecutar función correspondiente
@@ -48,6 +47,8 @@ elif opcion == "Parte C - Temor y Persecución":
     abrir_parte_c()
 elif opcion == "Generar PDF completo":
     generar_pdf()
+elif opcion == "Ver respuestas guardadas":
+    ver_respuestas()
 
 # 🧭 Pie de página ceremonial
 st.markdown("---")
@@ -56,4 +57,5 @@ Aplicación creada por Jorge Artigas
 para proteger la voz de quienes buscan asilo.  
 Diseñada con claridad, dignidad y propósito.
 """)
+
 
