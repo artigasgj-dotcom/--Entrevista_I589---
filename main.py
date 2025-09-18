@@ -54,3 +54,5 @@ Aplicación creada por Jorge Artigas
 para proteger la voz de quienes buscan asilo.  
 Diseñada con claridad, dignidad y propósito.
 """)
+from inicializar_db import inicializar_base
+inicializar_base()
