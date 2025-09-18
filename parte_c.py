@@ -1,5 +1,4 @@
-import tkinter as tk
-from tkinter import messagebox
+import streamlit as st
 import sqlite3
 
 def guardar_parte_c(temor, persecucion, daño, tortura, apoyo):
@@ -23,41 +22,29 @@ def guardar_parte_c(temor, persecucion, daño, tortura, apoyo):
     conn.close()
 
 def abrir_parte_c():
-    ventana = tk.Toplevel()
-    ventana.title("Parte C - Temor y Persecución")
-    ventana.geometry("600x500")
-    ventana.configure(bg="#f9f9f9")
+    st.subheader("🧩 Parte C – Temor y Persecución")
 
-    campos = {
-        "¿Por qué teme regresar a su país?": None,
-        "¿Ha sufrido persecución en el pasado?": None,
-        "¿Ha recibido amenazas o daño físico?": None,
-        "¿Teme ser torturado si regresa?": None,
-        "¿Recibe apoyo emocional, legal o espiritual?": None
-    }
+    st.markdown("""
+    Esta sección recoge tus experiencias de temor, daño y persecución.  
+    Puedes compartir con confianza. Tu voz será cuidada con respeto y protección.
+    """)
 
-    entradas = {}
-    fila = 0
-    for etiqueta in campos:
-        tk.Label(ventana, text=etiqueta, bg="#f9f9f9", wraplength=500, justify="left").grid(row=fila, column=0, padx=10, pady=5, sticky="w")
-        entrada = tk.Text(ventana, width=60, height=3)
-        entrada.grid(row=fila, column=1, padx=10, pady=5)
-        entradas[etiqueta] = entrada
-        fila += 1
+    temor = st.text_area("¿Por qué teme regresar a su país?")
+    persecucion = st.text_area("¿Ha sufrido persecución en el pasado?")
+    daño = st.text_area("¿Ha recibido amenazas o daño físico?")
+    tortura = st.text_area("¿Teme ser torturado si regresa?")
+    apoyo = st.text_area("¿Recibe apoyo emocional, legal o espiritual?")
 
-    def guardar():
-        datos = [entradas[campo].get("1.0", "end").strip() for campo in campos]
+    if st.button("Guardar Parte C"):
+        respuestas = [temor, persecucion, daño, tortura, apoyo]
 
-        if not all(datos):
-            messagebox.showwarning("Faltan datos", "Por favor completa todos los campos.")
+        if not all(respuestas):
+            st.warning("⚠️ Por favor completa todos los campos antes de guardar.")
             return
 
-        if any(len(texto) < 10 for texto in datos):
-            messagebox.showerror("Error", "Cada respuesta debe tener al menos una frase significativa.")
+        if any(len(texto.strip()) < 10 for texto in respuestas):
+            st.error("❌ Cada respuesta debe tener al menos una frase significativa.")
             return
 
-        guardar_parte_c(*datos)
-        messagebox.showinfo("Guardado", "Parte C guardada correctamente.")
-        ventana.destroy()
-
-    tk.Button(ventana, text="Guardar Parte C", command=guardar).grid(row=fila, column=0, columnspan=2, pady=20)
+        guardar_parte_c(*respuestas)
+        st.success("✅ Parte C guardada correctamente con dignidad.")
