@@ -28,16 +28,11 @@ def ver_respuestas():
         for registro in registros:
             id_, temor, persecucion, daño, tortura, apoyo = registro
             with st.expander(f"🧍 Cliente #{id_}"):
-                st.markdown(f"**¿Por qué teme regresar a su país?**  
-                {temor}")
-                st.markdown(f"**¿Ha sufrido persecución en el pasado?**  
-                {persecucion}")
-                st.markdown(f"**¿Ha recibido amenazas o daño físico?**  
-                {daño}")
-                st.markdown(f"**¿Teme ser torturado si regresa?**  
-                {tortura}")
-                st.markdown(f"**¿Recibe apoyo emocional, legal o espiritual?**  
-                {apoyo}")
+                st.markdown(f"**¿Por qué teme regresar a su país?**\n{temor}")
+                st.markdown(f"**¿Ha sufrido persecución en el pasado?**\n{persecucion}")
+                st.markdown(f"**¿Ha recibido amenazas o daño físico?**\n{daño}")
+                st.markdown(f"**¿Teme ser torturado si regresa?**\n{tortura}")
+                st.markdown(f"**¿Recibe apoyo emocional, legal o espiritual?**\n{apoyo}")
     else:
         st.info("No hay respuestas registradas en Parte C aún.")
 
