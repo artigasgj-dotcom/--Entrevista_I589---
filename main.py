@@ -1,4 +1,4 @@
-import Streamlit as tk
+import streamlit as tk
 from PIL import Image, ImageTk
 from entrevista import abrir_entrevista
 from parte_a_ampliada import abrir_parte_a_ampliada
@@ -64,3 +64,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
